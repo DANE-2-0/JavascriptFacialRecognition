@@ -1,5 +1,4 @@
 import React, {useRef} from 'react'
-// import logo from './logo.svg';
 import './App.css';
 import * as tf from "@tensorflow/tfjs";
 import * as facemesh from "@tensorflow-models/facemesh"; 
@@ -8,11 +7,11 @@ import {drawMesh} from "./utilities"
 
 function App() {
 
-  // Setup references
+  // References
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
 
-  // Load facemesh
+  // Facemesh
   const runFacemesh = async () => {
     const net = await facemesh.load({
       inputResolution: {width:640, height:48}, scale:0.8
@@ -22,7 +21,7 @@ function App() {
     }, 100) // This is being run every 100 miliseconds
   };
 
-  // Detect Facemesh 
+  // Detect 
   const detect = async (net) => {
     if (
       typeof webcamRef.current !== "undefined" 
@@ -30,24 +29,24 @@ function App() {
       && webcamRef.current.video.readyState === 4
       )  {
 
-        // Get video properties
+        // Video properties
         const video = webcamRef.current.video;
         const videoWidth = webcamRef.current.video.videoWidth;
         const videoHeight = webcamRef.current.video.videoHeight;
 
-        // Set video width
+        // Video width
         webcamRef.current.video.width = videoWidth;
         webcamRef.current.video.height = videoHeight;
 
-        // Set canvas width
+        // Canvas width
         canvasRef.current.height = videoHeight;
         canvasRef.current.width = videoWidth;
 
-        // Make detections 
+        // Detections 
         const face = await net.estimateFaces(video);
         console.log(face);
 
-        // Get canvas context for drawing 
+        // Canvas context for drawing 
         const ctx = canvasRef.current.getContext('2d');
         drawMesh(face, ctx);
 
