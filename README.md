@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# HOW IT WORKS
 
 
 ## Available Scripts
