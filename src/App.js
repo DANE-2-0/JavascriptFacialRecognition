@@ -7,21 +7,21 @@ import {drawMesh} from "./utilities"
 
 function App() {
 
-  // References
+  // Setup references
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
 
-  // Facemesh
+  // Load facemesh
   const runFacemesh = async () => {
     const net = await facemesh.load({
       inputResolution: {width:640, height:48}, scale:0.8
     })
     setInterval(()=>{
       detect(net)
-    }, 100) // This is being run every 100 miliseconds
+    }, 100) // This is being run every 100 miliseconds consistently updated the array
   };
 
-  // Detect 
+  // Facemesh 
   const detect = async (net) => {
     if (
       typeof webcamRef.current !== "undefined" 
@@ -29,7 +29,7 @@ function App() {
       && webcamRef.current.video.readyState === 4
       )  {
 
-        // Video properties
+        // Get video properties
         const video = webcamRef.current.video;
         const videoWidth = webcamRef.current.video.videoWidth;
         const videoHeight = webcamRef.current.video.videoHeight;
@@ -46,7 +46,7 @@ function App() {
         const face = await net.estimateFaces(video);
         console.log(face);
 
-        // Canvas context for drawing 
+        // Context for drawing 
         const ctx = canvasRef.current.getContext('2d');
         drawMesh(face, ctx);
 
