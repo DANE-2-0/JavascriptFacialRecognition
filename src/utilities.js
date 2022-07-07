@@ -2642,7 +2642,7 @@ export const TRIANGULATION = [
     255,
   ];
 
-// Draw triangle
+// Triangle drawn
 const drawPath = (ctx, points, closePath) => {
     const region = new Path2D();
     region.moveTo(points[0][0], points[0][1])
@@ -2654,13 +2654,13 @@ const drawPath = (ctx, points, closePath) => {
     if (closePath) {
         region.closePath();
     }
-    ctx.strokeStyle = "pink";
+    ctx.strokeStyle = "white";
     ctx.stroke(region);
 };
 
 
 
-// Draw the points 
+// Points drawn 
 export const drawMesh = (predictions, ctx) => {
     if (predictions.length > 0) {
 
@@ -2684,7 +2684,7 @@ export const drawMesh = (predictions, ctx) => {
                 
                 ctx.beginPath();
                 ctx.arc(x, y, 1, 0, 3 * Math.PI);
-                ctx.fillStyle = "aqua";
+                ctx.fillStyle = "red";
                 ctx.fill();
             }
         });
