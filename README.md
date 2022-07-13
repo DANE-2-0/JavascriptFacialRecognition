@@ -1,4 +1,12 @@
+# WHAT WE ARE DOING
+### Reason
+We created a facial detection model that is able to pick up facial structures using Tensorflow JS. With this, we have been able to start implementing it into other React applications to begin the cration of face id, secuirty features, and more!
+
+
+
 # HOW IT WORKS
+
+Run the commands below with Node downloaded along with Tensorflow and React. When this is done, you should be able to begin the download and running of the program we have created. 
 
 
 ## Available Scripts
