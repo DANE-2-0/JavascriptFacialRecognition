@@ -55,8 +55,8 @@ function App()
         console.log(face);
 
         // Facial Detections are drawn
-        const ctx = cRef.updating.getContext('2d');
-        drawMesh(face, ctx);
+        const contxt = cRef.updating.getContext('2d');
+        drawMesh(face, contxt);
 
       }
   };
