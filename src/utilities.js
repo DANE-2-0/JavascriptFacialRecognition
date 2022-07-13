@@ -2601,11 +2601,10 @@ export const FORMULA = [
 277,
 14,
 2,
-
-  ];
+];
 
 // Draw triangle
-const drawPath = (ctx, arraypoints, closePath) => 
+const drawPath = (contxt, arraypoints, endPath) => 
 {
     const region = new Path2D();
     region.moveTo(arraypoints[0][0], arraypoints[0][1])
@@ -2615,22 +2614,21 @@ const drawPath = (ctx, arraypoints, closePath) =>
         const point = arraypoints[i];
         region.lineTo(arraypoint[0], arraypoint[1]);
     }
-    if (closePath) 
+    if (endPath) 
     {
-        region.closePath();
+        region.endPath();
     }
-    ctx.strokeStyle = "red";
-    ctx.stroke(region);
+    contxt.strokeStyle = "yellow";
+    contxt.stroke(region);
 };
 
 
 
 // Draw the points 
-export const drawMesh = (predictions, ctx) => 
+export const drawMesh = (predictions, contxt) => 
 {
     if (predictions.length > 0) 
     {
-
         predictions.forEach((predictions) => 
         {
             const keypoints = predictions.scaledMesh;
@@ -2644,7 +2642,7 @@ export const drawMesh = (predictions, ctx) =>
                     // FORMULA[i * 3 + 1],
                     // FORMULA[i * 3 + 2],
                 //   ].map((index) => arraykeypoints[index]);
-                // drawPath(ctx, arraypoints, true);  
+                // drawPath(contxt, arraypoints, true);  
                 // }
             const t7 = performance.now(); // This shows our performance line by line as the points get outputted
             
@@ -2654,17 +2652,19 @@ export const drawMesh = (predictions, ctx) =>
                 const x = arraykeypoints[i][0];
                 const y = arraykeypoints[i][1];
                 const t8 = performance.now(); // Performance is getting outputted here
-                ctx.beginPath();
-                ctx.arc(x, y, 1, 0, 3 * Math.PI);
+                contxt.beginPath();
+                contxt.arc(x, y, 1, 0, 3 * Math.PI);
                 const t4 = t8-t7
                 if (t4> 9) // This will allow the points to detect your face and print it but also show differnet colors with differnet cpu performances
                 {
-                    ctx.fillStyle = "red";
-                } else{
-                    ctx.fillStyle = "aqua";
+                    contxt.fillStyle = "red";
+                } 
+                else
+                {
+                    contxt.fillStyle = "aqua";
                 }
-                ctx.fill();
-                console.log('FACE DETECTED')
+                contxt.fill();
+                console.log('FACE DETECTED') // What we output when the program detects a face 
             }
         });
     }
